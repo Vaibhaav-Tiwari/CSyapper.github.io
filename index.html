@@ -5,70 +5,173 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>neuralnets - Personal Website</title>
     <style>
-        /* Dark theme colors */
+        /* Enhanced dark theme colors with CSS variables */
         :root {
             --bg-color: #121212;
+            --bg-secondary: #1e1e1e;
             --text-color: #e0e0e0;
-            --link-color: #BB86FC;
-            --link-hover-color: #3700B3;
+            --text-secondary: #a0a0a0;
+            --accent-color: #BB86FC;
+            --accent-hover: #3700B3;
+            --success-color: #03DAC6;
             --section-spacing: 2rem;
+            --transition-speed: 0.3s;
+        }
+
+        /* Smooth scrolling for the whole page */
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
-            font-family: monospace;
+            font-family: 'Fira Code', monospace;
             line-height: 1.6;
             margin: 0;
             padding: 2rem;
             max-width: 800px;
             margin: 0 auto;
+            transition: all var(--transition-speed) ease;
         }
 
+        /* Gradient text effect for main heading */
         h1 {
-            font-size: 1.5rem;
+            font-size: 2rem;
             margin-bottom: var(--section-spacing);
+            background: linear-gradient(45deg, var(--accent-color), var(--success-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         h2 {
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             margin-top: var(--section-spacing);
             margin-bottom: 1rem;
+            color: var(--accent-color);
         }
 
+        /* Enhanced link styling */
         a {
-            color: var(--link-color);
+            color: var(--accent-color);
             text-decoration: none;
-            border-bottom: 1px solid var(--link-color);
+            position: relative;
+            transition: all var(--transition-speed) ease;
         }
 
-        a:hover {
-            color: var(--link-hover-color);
-            border-bottom-color: var(--link-hover-color);
+        a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--accent-color);
+            transition: width var(--transition-speed) ease;
         }
 
+        a:hover::after {
+            width: 100%;
+        }
+
+        /* Card-style sections */
+        .section {
+            background-color: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: var(--section-spacing);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform var(--transition-speed) ease;
+        }
+
+        .section:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Enhanced list styling */
         ul {
             list-style-type: none;
             padding: 0;
         }
 
         li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
+            padding-left: 1.2rem;
+            position: relative;
         }
 
+        li::before {
+            content: '•';
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+        }
+
+        /* Badge styling for dates */
+        .date-badge {
+            background-color: var(--bg-color);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Enhanced footer */
         .footer {
             margin-top: 3rem;
             padding-top: 1rem;
-            border-top: 1px solid var(--text-color);
+            border-top: 1px solid var(--bg-secondary);
             text-align: center;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
         }
 
         .footer a {
-            margin: 0 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .section {
-            margin-bottom: var(--section-spacing);
+        /* Status indicator */
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--success-color);
+        }
+
+        .status::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background-color: var(--success-color);
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        /* Responsive design improvements */
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .section {
+                padding: 1rem;
+            }
         }
     </style>
 </head>
@@ -77,22 +180,22 @@
         <h1>hi, i am <u>neuralnets</u>!</h1>
         
         <p>i am a second year student, studying computer science.</p>
-        <p>mainly work in deep learning/natural language processing.</p>
+        <p class="status">mainly work in deep learning/natural language processing</p>
 
         <section class="section">
             <h2>experience</h2>
             <ul>
-                <li>• intern @ ai4bharat [jan 25' - present]</li>
-                <li>• winter intern @ iitx [dec 24' - jan 25']</li>
-                <li>• research apprentice @ my college [jun 24' - aug 24']</li>
+                <li>intern @ ai4bharat <span class="date-badge">[jan 25' - present]</span></li>
+                <li>winter intern @ iitx <span class="date-badge">[dec 24' - jan 25']</span></li>
+                <li>research apprentice @ my college <span class="date-badge">[jun 24' - aug 24']</span></li>
             </ul>
         </section>
 
         <section class="section">
             <h2>projects</h2>
             <ul>
-                <li>• <a href="#">serious projects</a> : all my important projects</li>
-                <li>• <a href="#">fun projects</a> : all my fun projects</li>
+                <li><a href="#">serious projects</a> : all my important projects</li>
+                <li><a href="#">fun projects</a> : all my fun projects</li>
             </ul>
         </section>
 
@@ -104,9 +207,9 @@
         <section class="section">
             <h2>blogs</h2>
             <ul>
-                <li>• <a href="#">technical blogs</a> : all my blogs about topics</li>
-                <li>• <a href="#">guides</a> : all my blogs on experiences</li>
-                <li>• <a href="#">cp algorithms i am learning</a></li>
+                <li><a href="#">technical blogs</a> : all my blogs about topics</li>
+                <li><a href="#">guides</a> : all my blogs on experiences</li>
+                <li><a href="#">cp algorithms i am learning</a></li>
             </ul>
         </section>
 
@@ -116,8 +219,30 @@
     </main>
 
     <footer class="footer">
-        <a href="https://github.com/yourusername">github</a> |
-        <a href="https://twitter.com/yourusername">twitter</a>
+        <a href="https://github.com/vaibhaav-tiwari">
+            <svg height="24" width="24" viewBox="0 0 16 16">
+                <path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+            </svg>
+            github
+        </a>
+        <a href="https://x.com/RVariable65703">
+            <svg height="24" width="24" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+            </svg>
+            twitter
+        </a>
+        <a href="https://linkedin.com/in/vaibhaavtiwari">
+            <svg height="24" width="24" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"></path>
+            </svg>
+            LinkedIn
+        </a>
+        <a href="https://drive.google.com/drive/folders/yourdriveid">
+            <svg height="24" width="24" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M12 10L7 3H17L22 10H12zM2 10L7 3L9.5 7L4.5 14H2V10zM12 10H22L17 21H7L12 10zM4.5 14L9.5 7L12 10L7 21H4.5V14z"></path>
+            </svg>
+            Resume
+        </a>
     </footer>
 </body>
 </html>
